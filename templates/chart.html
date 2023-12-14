@@ -40,6 +40,7 @@
 
       .filter-section,
       .chart-section,
+      .curriculum-section,
       .text-section {
         border-radius: 10px;
         padding: 20px;
@@ -55,16 +56,34 @@
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); /* Reduced shadow opacity on hover */
       }
 
+      .curriculum-section {
+        width: 20%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .curriculum-section:hover {
+        transform: scale(1.02);
+      }
+
       .filter-section {
+        width: 35%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .filter-section:hover {
+        transform: scale(1.02);
+      }
+
+      .chart-section {
         width: 45%;
         background-color: #555; /* Lighter background color */
         margin-right: 20px;
       }
 
-      .chart-section {
-        width: 55%;
-        background-color: #555; /* Lighter background color */
-        margin-right: 20px;
+      .chart-section:hover {
+        transform: scale(1.02);
       }
 
       .text-section {
@@ -248,32 +267,24 @@
     ></script>
 
     <div class="main-container">
+      <div class="curriculum-section">
+        <h2 id="curriculum-header1">Curriculum-1</h2>
+        <ul class="list-group">
+          {% for key, value in llm_topics.items() %}
+          <li
+            class="list-group-item list-group-item-action list-group-item-dark"
+            style="margin:2%;box shadow: 5px 10px"
+          >
+            {{ value }}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
       <div class="chart-section">
         <div class="filter-box">
           <p>Chart:</p>
           {{chart|safe}}
-        </div>
-        <div class="filter-box">
-          <div
-            style="
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-            "
-          >
-            <div class="topic-section">
-              <h2>Curriculum-1</h2>
-              <ul class="list-group">
-                {% for key, value in llm_topics.items() %}
-                <li
-                  class="list-group-item list-group-item-action list-group-item-dark"
-                >
-                  {{ value }}
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -332,7 +343,7 @@
                 </p>
 
                 <div style="flex;flex-direction:row;margin-left:8%">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -344,7 +355,7 @@
                       >Strongly Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -356,7 +367,7 @@
                       >Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -368,7 +379,7 @@
                       >Neutral</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -380,7 +391,7 @@
                       >Agree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -409,7 +420,7 @@
                 </p>
 
                 <div style="flex;flex-direction:row;margin-left:8%">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -421,7 +432,7 @@
                       >Strongly Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -433,7 +444,7 @@
                       >Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -445,7 +456,7 @@
                       >Neutral</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -457,7 +468,7 @@
                       >Agree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -486,7 +497,7 @@
                 </p>
 
                 <div style="flex;flex-direction:row;margin-left:8%">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -498,7 +509,7 @@
                       >Strongly Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -510,7 +521,7 @@
                       >Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -522,7 +533,7 @@
                       >Neutral</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -534,7 +545,7 @@
                       >Agree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -556,7 +567,7 @@
                 </p>
 
                 <div style="flex;flex-direction:row;margin-left:8%">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -568,7 +579,7 @@
                       >Strongly Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -580,7 +591,7 @@
                       >Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -592,7 +603,7 @@
                       >Neutral</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -604,7 +615,7 @@
                       >Agree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -633,7 +644,7 @@
                 </p>
 
                 <div style="flex;flex-direction:row;margin-left:8%">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -645,7 +656,7 @@
                       >Strongly Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -657,7 +668,7 @@
                       >Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -669,7 +680,7 @@
                       >Neutral</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -681,7 +692,7 @@
                       >Agree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -703,7 +714,7 @@
                 </p>
 
                 <div style="flex;flex-direction:row;margin-left:8%">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -715,7 +726,7 @@
                       >Strongly Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -727,7 +738,7 @@
                       >Disagree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -739,7 +750,7 @@
                       >Neutral</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -751,7 +762,7 @@
                       >Agree</label
                     >
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
@@ -854,6 +865,15 @@
     <script>
 
       var curriculum = {{ curriculum | tojson }}
+
+      if(curriculum === "first")
+      {
+        var headerElement=document.getElementById("curriculum-header1")
+        headerElement.textContent = "Curriculum-1"
+      } else
+      {
+        headerElement.textContent = "Curriculum-2"
+      }
 
       var startTime = new Date()
 

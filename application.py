@@ -17,7 +17,8 @@ education_level = ""
 visualization_level = ""
 topics_to_be_annotated = ""
 
-survey1_answers = {}
+survey1_curriculum1_answers = {}
+survey1_curriculum2_answers = {}
 survey2_answers = {}
 
 new_topic_explanation = ""
@@ -247,6 +248,8 @@ def chart2():
 @application.route('/send-survey1-curriculum1-answer',methods=['POST'])
 def process_survey1_answers1():
     
+
+
     # global survey1_answers
     # content = request.get_json()
     # print(content)
