@@ -1,0 +1,12 @@
+{
+  "1": "Introduction to Scatter Plot Charts",
+  "2": "Understanding the Axes of a Scatter Plot",
+  "3": "Interpreting Data Points in a Scatter Plot",
+  "4": "Understanding the Relationship between Variables in a Scatter Plot",
+  "5": "Identifying Patterns and Trends in a Scatter Plot",
+  "6": "Analyzing Outliers in a Scatter Plot",
+  "7": "Understanding the Correlation in a Scatter Plot",
+  "8": "Using Scatter Plots for Predictions",
+  "9": "Comparing Scatter Plots",
+  "10": "Real-world Applications of Scatter Plots"
+}

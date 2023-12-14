@@ -1,0 +1,12 @@
+{
+  "1": "Introduction to Charts and Graphs",
+  "2": "Understanding the Basics of a Bubble Chart",
+  "3": "Identifying Key Elements in a Bubble Chart",
+  "4": "Interpreting the X and Y Axes in a Bubble Chart",
+  "5": "Understanding the Significance of Bubble Size in a Bubble Chart",
+  "6": "Understanding the Significance of Bubble Color in a Bubble Chart",
+  "7": "Analyzing Relationships between Variables in a Bubble Chart",
+  "8": "Comparing Data Points in a Bubble Chart",
+  "9": "Drawing Conclusions from a Bubble Chart",
+  "10": "Applying Bubble Chart Interpretation Skills to Real-World Scenarios"
+}

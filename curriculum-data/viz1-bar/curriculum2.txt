@@ -1,0 +1,14 @@
+{
+  "1": "Introduction to Charts and Graphs",
+  "2": "Understanding the Basics of a Bar Chart",
+  "3": "Introduction to Grouped Bar Charts",
+  "4": "Understanding the Components of a Grouped Bar Chart",
+  "5": "Interpreting Data from a Grouped Bar Chart",
+  "6": "Understanding the Role of Colors in Grouped Bar Charts",
+  "7": "Analyzing Trends in Grouped Bar Charts",
+  "8": "Comparing Data Sets in Grouped Bar Charts",
+  "9": "Understanding the Impact of Scale on Grouped Bar Charts",
+  "10": "Applying Real-World Context to Grouped Bar Charts",
+  "11": "Critical Thinking and Analysis of Grouped Bar Charts",
+  "12": "Practical Exercises in Interpreting Grouped Bar Charts"
+}

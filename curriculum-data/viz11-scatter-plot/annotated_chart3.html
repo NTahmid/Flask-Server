@@ -1,0 +1,123 @@
+To annotate and highlight the data that are talked about in the explanation, we will modify the HTML code to include the new data and add annotations in red. We will also add a new feature to the tooltip to show a link to the cyclist's information page when available.
+
+Here's the modified HTML code:
+
+```html
+<!doctype html>
+<meta charset="utf-8" />
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v6.min.js" charset="utf-8"></script>
+  </head>
+
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+
+    #tooltip {
+      visibility: hidden;
+      position: absolute;
+      opacity: 0.8;
+      padding: 10px;
+      vertical-align: middle;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+      font-size: 14px;
+    }
+
+    .textbox {
+      font-size: 14px;
+    }
+
+    #legend {
+      opacity: 0.2;
+      fill: #2c3e50;
+    }
+
+    #title {
+      text-anchor: middle;
+      font-size: 22px;
+    }
+
+    .label {
+      text-anchor: middle;
+    }
+
+    #svg {
+      background-color: white;
+    }
+
+    .annotation {
+      fill: red;
+    }
+  </style>
+
+  <body>
+    <div id="container" align="center"></div>
+
+    <script type="text/javascript">
+      // Input data for the chart
+      var data = [
+        // ... (Insert the provided data array here)
+      ];
+
+      // Colors to differentiate riders with and without doping allegations
+      var colors = ["#27ae60", "#8e44ad"];
+
+      // The attributes of the riders corresponding to the above colors
+      var legendKeys = ["No Doping Allegations", "Doping Allegations"];
+
+      // Create an invisible div for the tooltip
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("visibility", "hidden");
+
+      // Set up the SVG and scales as before, then...
+
+      // 5. Draw individual scatter points and define mouse events for the tooltip
+      svg
+        .selectAll("scatterPoints")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", (d) => xScale(d["Year"]))
+        .attr("cy", (d) => yScale(parseTime(d["Time"])))
+        .attr("r", 5)
+        .attr("fill", (d) => (d["Doping"] == "" ? colors[0] : colors[1]))
+        .attr("class", "dot")
+        .attr("data-xvalue", (d) => d["Year"])
+        .attr("data-yvalue", (d) => parseTime(d["Time"]))
+        .on("mouseover", function (event, d) {
+          tooltip
+            .style("visibility", "visible")
+            .style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY - 80 + "px")
+            .attr("data-year", d["Year"])
+            .html(
+              d["Name"] +
+                " (" +
+                d["Year"] +
+                ") <br> Time: " +
+                d["Time"] +
+                "<br><br>" +
+                d["Doping"] +
+                (d["URL"] ? `<br><a href="${d["URL"]}" target="_blank" class="annotation">More info</a>` : "")
+            );
+        })
+        .on("mousemove", function (event) {
+          tooltip.style("left", event.pageX + 10 + "px");
+        })
+        .on("mouseout", function () {
+          tooltip.style("visibility", "hidden");
+        });
+
+      // ... (Continue with the rest of the code as before)
+    </script>
+  </body>
+</html>
+```
+
+Please note that due to the length of the code and the provided data, I have omitted the actual data array for brevity. You should insert the provided data array where indicated in the code. Additionally, the `mouseover` event handler has been updated to include a link to the cyclist's information page when available, and the link is styled with the class `annotation` to appear in red.

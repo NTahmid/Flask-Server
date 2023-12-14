@@ -1,0 +1,229 @@
+Here is the modified HTML code with annotations in red for the data points mentioned in the explanation:
+
+```html
+<!doctype html>
+<meta charset="utf-8" />
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v6.min.js" charset="utf-8"></script>
+  </head>
+
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+
+    #tooltip {
+      visibility: hidden;
+      position: absolute;
+      opacity: 0.8;
+      padding: 10px;
+      vertical-align: middle;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+      font-size: 14px;
+    }
+
+    .textbox {
+      font-size: 14px;
+    }
+
+    #legend {
+      opacity: 0.2;
+      fill: #2c3e50;
+    }
+
+    #title {
+      text-anchor: middle;
+      font-size: 22px;
+    }
+
+    .label {
+      text-anchor: middle;
+    }
+
+    #svg {
+      background-color: white;
+    }
+
+    .highlighted {
+      stroke: red;
+      stroke-width: 2px;
+    }
+  </style>
+
+  <body>
+    <div id="container" align="center"></div>
+
+    <script type="text/javascript">
+      // Data provided in the explanation
+      var data = [
+        // ... (Insert the provided data array here)
+      ];
+
+      // Colors to differentiate riders with and without doping allegations
+      var colors = ["#27ae60", "#8e44ad"];
+
+      // The attributes of the riders corresponding to the above colors
+      var legendKeys = ["No Doping Allegations", "Doping Allegations"];
+
+      // Create an invisible div for the tooltip
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("visibility", "hidden");
+
+      // Append svg-object for the bar chart to a div in your webpage
+      var width = 700;
+      var height = 500;
+      var margin = { left: 90, top: 80, bottom: 50, right: 20 };
+      var axisOffset = 10; // How far the axes are moved away from each other
+
+      const svg = d3
+        .select("#container")
+        .append("svg")
+        .attr("id", "svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      // Define scales to translate domains of the data to the range of the svg
+      var xMin = d3.min(data, (d) => d["Year"]);
+      var xMax = d3.max(data, (d) => d["Year"]);
+
+      var parseTime = d3.timeParse("%M:%S");
+      var yMin = d3.min(data, (d) => parseTime(d["Time"]));
+      var yMax = d3.max(data, (d) => parseTime(d["Time"]));
+
+      var xScale = d3
+        .scaleLinear()
+        .domain([xMin, xMax])
+        .range([margin.left + axisOffset, width - margin.right]);
+
+      var yScale = d3
+        .scaleTime()
+        .domain([yMax, yMin])
+        .range([height - margin.bottom - axisOffset, margin.top]);
+
+      // Draw and transform/translate horizontal and vertical axes
+      var xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));
+      var yAxis = d3
+        .axisLeft()
+        .scale(yScale)
+        .tickFormat(d3.timeFormat("%M:%S"));
+
+      svg
+        .append("g")
+        .attr("transform", "translate(0, " + (height - margin.bottom) + ")")
+        .attr("id", "x-axis")
+        .call(xAxis);
+
+      svg
+        .append("g")
+        .attr("transform", "translate(" + margin.left + ", 0)")
+        .attr("id", "y-axis")
+        .call(yAxis);
+
+      // Draw individual scatter points and define mouse events for the tooltip
+      svg
+        .selectAll("scatterPoints")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", (d) => xScale(d["Year"]))
+        .attr("cy", (d) => yScale(parseTime(d["Time"])))
+        .attr("r", 5)
+        .attr("fill", (d) => (d["Doping"] == "" ? colors[0] : colors[1]))
+        .attr("class", "dot")
+        .attr("data-xvalue", (d) => d["Year"])
+        .attr("data-yvalue", (d) => parseTime(d["Time"]))
+        .classed("highlighted", (d) => d["Name"] === "Marco Pantani" || d["Name"] === "Lance Armstrong") // Highlight specific data points
+        .on("mouseover", function (event, d) {
+          tooltip
+            .style("visibility", "visible")
+            .style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY - 80 + "px")
+            .attr("data-year", d["Year"])
+            .html(
+              d["Name"] +
+                " (" +
+                d["Year"] +
+                ") <br> Time: " +
+                d["Time"] +
+                "<br><br>" +
+                d["Doping"]
+            );
+        })
+        .on("mousemove", function (event) {
+          tooltip.style("left", event.pageX + 10 + "px");
+        })
+        .on("mouseout", function () {
+          tooltip.style("visibility", "hidden");
+        });
+
+      // Finalize chart by adding title, axes labels and legend
+      svg
+        .append("text")
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", height - margin.bottom / 5)
+        .attr("class", "label")
+        .text("Year");
+
+      svg
+        .append("text")
+        .attr("y", margin.left / 4)
+        .attr("x", -height / 2)
+        .attr("transform", "rotate(-90)")
+        .attr("class", "label")
+        .text("Time to finish");
+
+      svg
+        .append("text")
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", margin.top / 2.6)
+        .attr("id", "title")
+        .text("Doping in professional bike racing");
+
+      svg
+        .append("text")
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", margin.top / 1.4)
+        .text("35 fastest times to finish Alpe d'Huez")
+        .style("font-size", "16px")
+        .style("text-anchor", "middle");
+
+      svg
+        .selectAll("legendSymbols")
+        .data(legendKeys)
+        .enter()
+        .append("circle")
+        .attr("cx", width - margin.right - 200)
+        .attr("cy", (d, i) => 150 + i * 25)
+        .attr("r", 5)
+        .attr("fill", (d, i) => colors[i]);
+
+      svg
+        .selectAll("legendTexts")
+        .data(legendKeys)
+        .enter()
+        .append("text")
+        .text((d) => d)
+        .attr("x", width - margin.right - 200 + 15)
+        .attr("y", (d, i) => 150 + i * 25 + 5)
+        .attr("class", "textbox");
+
+      const legend = svg
+        .append("rect")
+        .attr("x", width - margin.right - 200 - 15)
+        .attr("y", 150 - 5 - 10)
+        .attr("rx", 5)
+        .attr("ry", 5)
+        .attr("width", 195)
+        .attr("height", 55)
+        .attr("id", "legend");
+    </script>
+  </body>
+</html>
+```
+
+Please note that you need to insert the provided data array into the `data` variable in the script section of the code. The `.classed("highlighted", ...)` function is used to add a red stroke to the data points for Marco Pantani and Lance Armstrong, as mentioned in the explanation.

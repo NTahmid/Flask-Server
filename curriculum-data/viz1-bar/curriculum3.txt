@@ -1,0 +1,12 @@
+{
+  "1": "Introduction to Grouped Bar Charts",
+  "2": "Understanding the Components of a Grouped Bar Chart",
+  "3": "Interpreting Data from the X and Y Axes",
+  "4": "Understanding the Significance of Bar Length and Position",
+  "5": "Interpreting Grouped Bars and Their Significance",
+  "6": "Understanding the Role of Colors in Grouped Bar Charts",
+  "7": "Reading and Interpreting the Chart Title and Subtitles",
+  "8": "Understanding the Role of Legends in Grouped Bar Charts",
+  "9": "Interpreting Negative Values in Bar Charts",
+  "10": "Applying Data Interpretation Skills to Real-World Examples"
+}

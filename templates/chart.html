@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Project Prototype</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Option 1: Include in HTML -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        color: white;
+        background: linear-gradient(45deg, #444, #666);
+        font-family: "Roboto", sans-serif;
+      }
+
+      .main-container {
+        height: 100vh;
+        padding: 50px;
+        box-sizing: border-box;
+        display: flex;
+      }
+
+      .filter-section,
+      .chart-section,
+      .text-section {
+        border-radius: 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%;
+        overflow: auto;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+      }
+
+      .filter-section:hover,
+      .text-section:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); /* Reduced shadow opacity on hover */
+      }
+
+      .filter-section {
+        width: 45%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .chart-section {
+        width: 55%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .text-section {
+        width: 70%;
+        background-color: #555; /* Lighter background color */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-control,
+      .dropdown-menu {
+        background-color: #666; /* Lighter input background color */
+        color: white;
+        border: 1px solid #777; /* Lighter border color */
+      }
+
+      .dropdown-item {
+        color: white;
+      }
+
+      .dropdown-item:hover {
+        background-color: #888; /* Lighter hover color for dropdown items */
+      }
+
+      .form-check-label {
+        font-weight: 300;
+      }
+
+      .form-check-input:checked + .form-check-label {
+        font-weight: 400;
+      }
+
+      .filter-box {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+      }
+
+      .carousel-box {
+        height: 60vh;
+        overflow: auto;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: none;
+        margin-left: 10%;
+        margin-right: 10%;
+        transition: all 0.3s ease;
+      }
+
+      .chart-box {
+        height: 70%;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+        overflow: auto;
+      }
+
+      .form-check-label:before {
+        background: #c1c0c0; /* Lighter color for unchecked state */
+        border: 1px solid #888; /* Lighter border color */
+      }
+
+      .form-check-label:after {
+        background: #999; /* Lighter color for checked state */
+        transform: scale(0.6);
+        opacity: 0;
+      }
+
+      .text-content {
+        flex: 1;
+        overflow: auto;
+        padding-bottom: 20px;
+      }
+
+      .text-section p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        padding-left: 15px;
+        border-left: 3px solid #999; /* Lighter border color */
+      }
+
+      .text-section p strong {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #eee;
+      }
+
+      .text-section p:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .topic-section {
+        height: 50%;
+        margin-right: 2%;
+        margin-left: 2%;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+        overflow: auto;
+      }
+
+      .explanation-box {
+        flex: 1;
+        margin-top: 20px;
+        background-color: #555; /* Lighter background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .explanation-text {
+        flex: 1;
+        overflow: auto;
+      }
+
+      .card-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+      }
+
+      .btn-icon {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+      }
+
+      /* Darker background on mouse-over */
+      .btn-icon:hover {
+        background-color: RoyalBlue;
+      }
+
+      .btn-light {
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .btn-light:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-light:active {
+        transform: scale(0.95);
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      .custom-btn-group label {
+        margin-right: 10px; /* Adjust the value to control the margin */
+      }
+
+      .carousel-item {
+        padding: 2% 2%;
+      }
+    </style>
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+
+    <div class="main-container">
+      <div class="chart-section">
+        <div class="filter-box">
+          <p>Chart:</p>
+          {{chart|safe}}
+        </div>
+        <div class="filter-box">
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            "
+          >
+            <div class="topic-section">
+              <h2>Curriculum-1</h2>
+              <ul class="list-group">
+                {% for key, value in llm_topics.items() %}
+                <li
+                  class="list-group-item list-group-item-action list-group-item-dark"
+                >
+                  {{ value }}
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div
+          id="carouselExampleDark"
+          class="carousel carousel-dark slide"
+          data-bs-ride="carousel"
+          data-bs-pause="hover"
+          data-bs-interval="false"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="4"
+              aria-label="Slide 5"
+            ></button>
+          </div>
+
+          <div class="carousel-inner">
+            <!-- Section-1 true -->
+            <div class="carousel-item active" data-bs-interval="1500">
+              <div class="carousel-box">
+                <h3 style="text-align: center">Question 1: (Redundancy)</h3>
+
+                <div style="margin-top: 5%"></div>
+                <p style="margin-left: 8%">
+                  The topics in the curriculum repeat content unnecessarily
+                </p>
+
+                <div style="flex;flex-direction:row;margin-left:8%">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="redundancyRadioOptions"
+                      id="redundancyRadio1"
+                      value="strongly disagree"
+                    />
+                    <label class="form-check-label" for="redundancyRadio1"
+                      >Strongly Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="redundancyRadioOptions"
+                      id="redundancyRadio2"
+                      value="disagree"
+                    />
+                    <label class="form-check-label" for="redundancyRadio2"
+                      >Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="redundancyRadioOptions"
+                      id="redundancyRadio3"
+                      value="neutral"
+                    />
+                    <label class="form-check-label" for="redundancyRadio3"
+                      >Neutral</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="redundancyRadioOptions"
+                      id="redundancyRadio4"
+                      value="agree"
+                    />
+                    <label class="form-check-label" for="redundancyRadio4"
+                      >Agree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="redundancyRadioOptions"
+                      id="redundancyRadio5"
+                      value="strongly agree"
+                    />
+                    <label class="form-check-label" for="redundancyRadio5"
+                      >Strongly Agree</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="1500">
+              <div class="carousel-box">
+                <h3 style="text-align: center">
+                  Question 2: (Dependency/Coherence)
+                </h3>
+
+                <div style="margin-top: 5%"></div>
+                <p style="margin-left: 8%">
+                  Each topic effectively builds upon the knowledge from the
+                  previous topics
+                </p>
+
+                <div style="flex;flex-direction:row;margin-left:8%">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dependencyRadioOptions"
+                      id="dependencyRadio1"
+                      value="strongly disagree"
+                    />
+                    <label class="form-check-label" for="dependencyRadio1"
+                      >Strongly Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dependencyRadioOptions"
+                      id="dependencyRadio2"
+                      value="disagree"
+                    />
+                    <label class="form-check-label" for="dependencyRadio2"
+                      >Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dependencyRadioOptions"
+                      id="dependencyRadio3"
+                      value="neutral"
+                    />
+                    <label class="form-check-label" for="dependencyRadio3"
+                      >Neutral</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dependencyRadioOptions"
+                      id="dependencyRadio4"
+                      value="agree"
+                    />
+                    <label class="form-check-label" for="dependencyRadio4"
+                      >Agree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dependencyRadioOptions"
+                      id="dependencyRadio5"
+                      value="strongly agree"
+                    />
+                    <label class="form-check-label" for="dependencyRadio5"
+                      >Strongly Agree</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="1500">
+              <div class="carousel-box">
+                <h3 style="text-align: center">
+                  Question 3: (Relevance/Objective)
+                </h3>
+
+                <div style="margin-top: 5%"></div>
+                <p style="margin-left: 8%">
+                  The topics of the curricula contribute to data visualization
+                  literacy that is shown on the left side:
+                </p>
+
+                <div style="flex;flex-direction:row;margin-left:8%">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions1"
+                      id="relevance1Radio1"
+                      value="strongly disagree"
+                    />
+                    <label class="form-check-label" for="relevance1Radio1"
+                      >Strongly Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions1"
+                      id="relevance1Radio2"
+                      value="disagree"
+                    />
+                    <label class="form-check-label" for="relevance1Radio2"
+                      >Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions1"
+                      id="relevance1Radio3"
+                      value="neutral"
+                    />
+                    <label class="form-check-label" for="relevance1Radio3"
+                      >Neutral</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions1"
+                      id="relevance1Radio4"
+                      value="agree"
+                    />
+                    <label class="form-check-label" for="relevance1Radio4"
+                      >Agree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions1"
+                      id="relevance1Radio5"
+                      value="strongly agree"
+                    />
+                    <label class="form-check-label" for="relevance1Radio5"
+                      >Strongly Agree</label
+                    >
+                  </div>
+                </div>
+
+                <div style="margin-top: 5%"></div>
+
+                <p style="margin-left: 8%">
+                  Some topics of the curricula are irrelevant to data
+                  visualization literacy.
+                </p>
+
+                <div style="flex;flex-direction:row;margin-left:8%">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions2"
+                      id="relevance2Radio1"
+                      value="strongly disagree"
+                    />
+                    <label class="form-check-label" for="relevance2Radio1"
+                      >Strongly Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions2"
+                      id="relevance2Radio2"
+                      value="disagree"
+                    />
+                    <label class="form-check-label" for="relevance2Radio2"
+                      >Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions2"
+                      id="relevance2Radio3"
+                      value="neutral"
+                    />
+                    <label class="form-check-label" for="relevance2Radio3"
+                      >Neutral</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions2"
+                      id="relevance2Radio4"
+                      value="agree"
+                    />
+                    <label class="form-check-label" for="relevance2Radio4"
+                      >Agree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="relevanceRadioOptions2"
+                      id="relevance2Radio5"
+                      value="strongly agree"
+                    />
+                    <label class="form-check-label" for="relevance2Radio5"
+                      >Strongly Agree</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="1500">
+              <div class="carousel-box">
+                <h3 style="text-align: center">
+                  Question 4: (Comprehensiveness/Depth)
+                </h3>
+
+                <div style="margin-top: 5%"></div>
+                <p style="margin-left: 8%">
+                  The lessons cover all necessary aspects of data visualization
+                  comprehensively.
+                </p>
+
+                <div style="flex;flex-direction:row;margin-left:8%">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions1"
+                      id="depth1Radio1"
+                      value="strongly disagree"
+                    />
+                    <label class="form-check-label" for="depth1Radio1"
+                      >Strongly Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions1"
+                      id="depth1Radio2"
+                      value="disagree"
+                    />
+                    <label class="form-check-label" for="depth1Radio2"
+                      >Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions1"
+                      id="depth1Radio3"
+                      value="neutral"
+                    />
+                    <label class="form-check-label" for="depth1Radio3"
+                      >Neutral</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions1"
+                      id="depth1Radio4"
+                      value="agree"
+                    />
+                    <label class="form-check-label" for="depth1Radio4"
+                      >Agree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions1"
+                      id="depth1Radio5"
+                      value="strongly agree"
+                    />
+                    <label class="form-check-label" for="depth1Radio5"
+                      >Strongly Agree</label
+                    >
+                  </div>
+                </div>
+
+                <div style="margin-top: 5%"></div>
+
+                <p style="margin-left: 8%">
+                  The curriculum provides a deep understanding of each topic
+                  within data visualization.
+                </p>
+
+                <div style="flex;flex-direction:row;margin-left:8%">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions2"
+                      id="depth2Radio1"
+                      value="strongly disagree"
+                    />
+                    <label class="form-check-label" for="relevance2Radio1"
+                      >Strongly Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions2"
+                      id="depth2Radio2"
+                      value="disagree"
+                    />
+                    <label class="form-check-label" for="depth2Radio2"
+                      >Disagree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions2"
+                      id="depth2Radio3"
+                      value="neutral"
+                    />
+                    <label class="form-check-label" for="depth2Radio3"
+                      >Neutral</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions2"
+                      id="depth2Radio4"
+                      value="agree"
+                    />
+                    <label class="form-check-label" for="depth2Radio4"
+                      >Agree</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="depthRadioOptions2"
+                      id="depth2Radio5"
+                      value="strongly agree"
+                    />
+                    <label class="form-check-label" for="depth2Radio5"
+                      >Strongly Agree</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="1500">
+              <div class="carousel-box">
+                <h3 style="text-align: center">Open Ended Questions</h3>
+
+                <div style="margin-top: 5%"></div>
+                <p style="margin-left: 8%">
+                  What are the strengths of the Curriculum?
+                </p>
+
+                <textarea
+                  class="form-control"
+                  style="width: 75%; margin-left: 8%"
+                  name="openTextbox1"
+                  id="openData1"
+                  rows="2"
+                  placeholder="Long answer text..."
+                ></textarea>
+
+                <div style="margin-top: 5%"></div>
+
+                <p style="margin-left: 8%">
+                  What are the strengths of the Curriculum?
+                </p>
+
+                <textarea
+                  class="form-control"
+                  style="width: 75%; margin-left: 8%"
+                  name="openTextbox2"
+                  id="openData2"
+                  rows="2"
+                  placeholder="Long answer text..."
+                ></textarea>
+
+                <div style="margin-top: 5%"></div>
+
+                <p style="margin-left: 8%">
+                  How could the Curriculum be better?
+                </p>
+
+                <textarea
+                  class="form-control"
+                  style="width: 75%; margin-left: 8%"
+                  name="openTextbox3"
+                  id="openData3"
+                  rows="2"
+                  placeholder="Long answer text..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+        <div class="filter-box" style="justify-content: center; border: none">
+          <button
+            type="button"
+            onClick="sendAnswers()"
+            class="btn btn-primary btn-lg btn-block"
+            style="width: 100%"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      var curriculum = {{ curriculum | tojson }}
+
+      var startTime = new Date()
+
+      var answerObject = {
+        redundancyAnswer:"",
+        dependencyAnswer:"",
+        relevanceAnswer1:"",
+        relevanceAnswer2:"",
+        depthAnswer1:"",
+        depthAnswer2:"",
+        openAnswer1:"",
+        openAnswer2:"",
+        openAnswer3:"",
+      }
+
+
+      function sendAnswers() {
+
+
+        var newAnswerObject = {...answerObject};
+
+        //textbox answer values
+        newAnswerObject["openAnswer1"] =
+          document.getElementById("openData1").value;
+        newAnswerObject["openAnswer2"] =
+          document.getElementById("openData2").value;
+        newAnswerObject["openAnswer3"] =
+          document.getElementById("openData3").value;
+
+        var keysArray = [
+          "redundancyAnswer",
+          "dependencyAnswer",
+          "relevanceAnswer1",
+          "relevanceAnswer2",
+          "depthAnswer1",
+          "depthAnswer2"
+        ]
+
+        var nameArray = [
+          "redundancyRadioOptions",
+          "dependencyRadioOptions",
+          "relevanceRadioOptions1",
+          "relevanceRadioOptions2",
+          "depthRadioOptions1",
+          "depthRadioOptions2",
+        ]
+
+        assignAnswer(newAnswerObject, keysArray, nameArray);
+
+        //console.log(answerObject);
+
+        var answerObjectKeys = Object.keys(newAnswerObject);
+
+        var flag = false;
+
+        for(i=0;i<answerObjectKeys.length;i++)
+        {
+          if(newAnswerObject[answerObjectKeys[i]] == "")
+          {
+
+            flag = true;
+          }
+        }
+
+        if(flag == false)
+        {
+
+          var endTime = new Date()
+          var timeTaken = endTime - startTime
+          var timeInSeconds = timeTaken/1000;
+
+          var jsonBody = { answers: newAnswerObject, time: timeInSeconds };
+
+          var selectedUrl = "/send-survey1-curriculum1-answer"
+          if(curriculum !== "first")
+            selectedUrl = "/send-survey1-curriculum2-answer"
+
+
+          $.ajax({
+            url: selectedUrl,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(jsonBody),
+            success: function (serverResponseString) {
+              window.location.href = "/description";
+            },
+          });
+
+        }
+        else
+        {
+          alert("Please fill out the questions");
+        }
+
+
+      }
+
+      function assignAnswer(answerObject, keysArray, nameArray) {
+        for (i = 0; i < nameArray.length; i++) {
+          elements = document.getElementsByName(nameArray[i]);
+          for (j = 0; j < elements.length; j++) {
+            if (elements[j].checked) {
+              answerObject[keysArray[i]] = elements[j].value;
+              break;
+            }
+          }
+        }
+      }
+
+      // var res = await fetch("/get-modified-chart", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       topic: topic_name,
+      //       explanation: topic_explanation,
+      //       index: idx_key,
+      //     }),
+      //   });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1592 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Project Prototype</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Option 1: Include in HTML -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        color: white;
+        background: linear-gradient(45deg, #444, #666);
+        font-family: "Roboto", sans-serif;
+      }
+
+      .main-container {
+        height: 100vh;
+        padding: 50px;
+        box-sizing: border-box;
+        display: flex;
+      }
+
+      .filter-section,
+      explanation-section .text-section {
+        border-radius: 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%;
+        overflow: auto;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+      }
+
+      .filter-section:hover,
+      .text-section:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); /* Reduced shadow opacity on hover */
+      }
+
+      .filter-section {
+        width: 50%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .explanation-section {
+        width: 20%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .text-section {
+        width: 70%;
+        background-color: #555; /* Lighter background color */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-control,
+      .dropdown-menu {
+        background-color: #666; /* Lighter input background color */
+        color: white;
+        border: 1px solid #777; /* Lighter border color */
+      }
+
+      .dropdown-item {
+        color: white;
+      }
+
+      .dropdown-item:hover {
+        background-color: #888; /* Lighter hover color for dropdown items */
+      }
+
+      .form-check-label {
+        font-weight: 300;
+      }
+
+      .form-check-input:checked + .form-check-label {
+        font-weight: 400;
+      }
+
+      .topic-box {
+        max-height: 40%;
+        overflow: auto;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+      }
+
+      .filter-box {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+      }
+
+      .carousel-box {
+        height: 60vh;
+        overflow: auto;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: none;
+        margin-left: 10%;
+        margin-right: 10%;
+        transition: all 0.3s ease;
+      }
+
+      .chart-box {
+        height: 70%;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+        overflow: auto;
+      }
+
+      .form-check-label:before {
+        background: #c1c0c0; /* Lighter color for unchecked state */
+        border: 1px solid #888; /* Lighter border color */
+      }
+
+      .form-check-label:after {
+        background: #999; /* Lighter color for checked state */
+        transform: scale(0.6);
+        opacity: 0;
+      }
+
+      .text-content {
+        flex: 1;
+        overflow: auto;
+        padding-bottom: 20px;
+      }
+
+      .text-section p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        padding-left: 15px;
+        border-left: 3px solid #999; /* Lighter border color */
+      }
+
+      .text-section p strong {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #eee;
+      }
+
+      .text-section p:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .topic-section {
+        height: 50%;
+        width: 50%;
+        margin-right: 2%;
+        margin-left: 2%;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+        overflow: auto;
+      }
+
+      .explanation-box {
+        flex: 1;
+        margin-top: 20px;
+        background-color: #555; /* Lighter background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .explanation-text {
+        flex: 1;
+        overflow: auto;
+      }
+
+      .card-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+      }
+
+      .btn-icon {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+      }
+
+      /* Darker background on mouse-over */
+      .btn-icon:hover {
+        background-color: RoyalBlue;
+      }
+
+      .btn-light {
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .btn-light:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-light:active {
+        transform: scale(0.95);
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      .custom-btn-group label {
+        margin-right: 10px; /* Adjust the value to control the margin */
+      }
+    </style>
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <div class="main-container">
+      <div
+        style="display: flex; flex-direction: row; height: 100%; width: 100%"
+      >
+        <div class="filter-section">
+          <div class="filter-box">
+            <p>Chart:</p>
+            <div id="chart-content">{{html_code | safe}}</div>
+          </div>
+          <div style="display: flex; flex-direction: row">
+            <div class="topic-box" style="width: 50%; overflow: auto">
+              <label for="topic-list">List of Topics:</label>
+              <ul class="list-group" id="topic-list">
+                {% for key, value in topics.items() %}
+                <li
+                  class="list-group-item list-group-item-success"
+                  id="item{{loop.index}}"
+                >
+                  {{loop.index}} {{ value }}
+                </li>
+                {% endfor %}
+              </ul>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  justify-content: center;
+                  margin-top: 5%;
+                "
+              >
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  style="margin-left: 5%; margin-right: 5%"
+                  onclick="topicPrev()"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="topicNext()"
+                  style="margin-left: 5%; margin-right: 5%"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+            <div class="filter-box" style="width: 50%; overflow: auto">
+              <p>
+                <strong>Topic Title:</strong> <span id="topic-name-span"></span>
+              </p>
+              <p>
+                <strong>Explanation:</strong>
+                <span id="explanation-span">{{ init_topic_explanation}}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <div
+            id="carouselExampleDark"
+            class="carousel carousel-dark slide"
+            data-bs-ride="carousel"
+            data-bs-pause="hover"
+            data-bs-interval="false"
+          >
+            <div class="carousel-inner">
+              <!-- Section-1 true -->
+              <div class="carousel-item active" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">Question 1: (Readability)</h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The lessons provided on the topic are easy to understand
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability1RadioOptions"
+                        id="readability1Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="readability1Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability1RadioOptions"
+                        id="readability1Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="readability1Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability1RadioOptions"
+                        id="readability1Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="readability1Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability1RadioOptions"
+                        id="readability1Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="readability1Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability1RadioOptions"
+                        id="readability1Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="readability1Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 5%"></div>
+
+                  <p style="margin-left: 8%">
+                    The annotations on the visualizations are clearly anchored
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability2RadioOptions"
+                        id="readability2Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="readability2Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability2RadioOptions"
+                        id="readability2Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="readability1Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability2RadioOptions"
+                        id="readability2Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="readability1Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability2RadioOptions"
+                        id="readability2Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="readability1Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="readability2RadioOptions"
+                        id="readability2Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="readability2Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">Question 2: (Correctness)</h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The lessons are accurate and error-free
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness1RadioOptions"
+                        id="correctness1Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="correctness1Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness1RadioOptions"
+                        id="correctness1Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="correctness1Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness1RadioOptions"
+                        id="correctness1Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="correctness1Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness1RadioOptions"
+                        id="correctness1Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="correctness1Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness1RadioOptions"
+                        id="correctness1Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="correctness1Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The annotations are accurate and error-free
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness2RadioOptions"
+                        id="correctness2Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="correctness2Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness2RadioOptions"
+                        id="correctness2Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="correctness2Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness2RadioOptions"
+                        id="correctness2Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="correctness2Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness2RadioOptions"
+                        id="correctness2Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="correctness2Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctness2RadioOptions"
+                        id="correctness2Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="correctness2Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">
+                    Question 3: (Relevance/Contextualization)
+                  </h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The lessons are contextually relevant to the visualizations
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance1RadioOptions"
+                        id="relevance1Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="relevance1Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance1RadioOptions"
+                        id="relevance1Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="relevance1Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance1RadioOptions"
+                        id="relevance1Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="relevance1Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance1RadioOptions"
+                        id="relevance1Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="relevance1Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance1RadioOptions"
+                        id="relevance1Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="relevance1Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 5%"></div>
+
+                  <p style="margin-left: 8%">
+                    The annotations effectively highlight and clarify key points
+                    of the lessons on the visualizations.
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance2RadioOptions"
+                        id="relevance2Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="relevance2Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance2RadioOptions"
+                        id="relevance2Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="relevance2Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance2RadioOptions"
+                        id="relevance2Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="relevance2Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance2RadioOptions"
+                        id="relevance2Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="relevance2Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="relevance2RadioOptions"
+                        id="relevance2Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="relevance2Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">Question 4: (Engagement)</h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The lessons are engaging to the learners.
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement1RadioOptions"
+                        id="engagement1Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="engagement1Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement1RadioOptions"
+                        id="engagement1Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="engagement1Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement1RadioOptions"
+                        id="engagement1Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="engagement1Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement1RadioOptions"
+                        id="engagement1Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="engagement1Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement1RadioOptions"
+                        id="engagement1Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="engagement1Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 5%"></div>
+
+                  <p style="margin-left: 8%">
+                    The annotations make the visualizations more engaging and
+                    interactive for the audience
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement2RadioOptions"
+                        id="engagement2Radio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="engagement2Radio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement2RadioOptions"
+                        id="engagement2Radio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="engagement2Radio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement2RadioOptions"
+                        id="engagement2Radio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="engagement2Radio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement2RadioOptions"
+                        id="engagement2Radio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="engagement2Radio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="engagement2RadioOptions"
+                        id="engagement2Radio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="engagement2Radio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">Question 5: (Depth)</h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The lessons provide a deep explanation of the data
+                    visualization topics
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="depthRadioOptions"
+                        id="depthRadio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="depthRadio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="depthRadioOptions"
+                        id="depthRadio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="depthRadio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="depthRadioOptions"
+                        id="depthRadio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="depthRadio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="depthRadioOptions"
+                        id="depthRadio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="depthRadio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="depthRadioOptions"
+                        id="depthRadio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="depthRadio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">Question 6: (Redundancy)</h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    The lessons avoid unnecessary repetition and redundancy in
+                    content
+                  </p>
+
+                  <div style="flex;flex-direction:row;margin-left:8%">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="redundancyRadioOptions"
+                        id="redundancyRadio1"
+                        value="strongly disagree"
+                      />
+                      <label class="form-check-label" for="redundancyRadio1"
+                        >Strongly Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="redundancyRadioOptions"
+                        id="redundancyRadio2"
+                        value="disagree"
+                      />
+                      <label class="form-check-label" for="redundancyRadio2"
+                        >Disagree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="redundancyRadioOptions"
+                        id="redundancyRadio3"
+                        value="neutral"
+                      />
+                      <label class="form-check-label" for="redundancyRadio3"
+                        >Neutral</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="redundancyRadioOptions"
+                        id="redundancyRadio4"
+                        value="agree"
+                      />
+                      <label class="form-check-label" for="redundancyRadio4"
+                        >Agree</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="redundancyRadioOptions"
+                        id="redundancyRadio5"
+                        value="strongly agree"
+                      />
+                      <label class="form-check-label" for="redundancyRadio5"
+                        >Strongly Agree</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="1500">
+                <div class="carousel-box">
+                  <h3 style="text-align: center">Open Ended Questions</h3>
+
+                  <div style="margin-top: 5%"></div>
+                  <p style="margin-left: 8%">
+                    What improvements would you suggest for lessons to make them
+                    more effective in conveying data literacy learning?
+                  </p>
+
+                  <textarea
+                    class="form-control"
+                    style="width: 75%; margin-left: 8%"
+                    name="openTextbox1"
+                    id="openData1"
+                    rows="2"
+                    placeholder="Long answer text..."
+                  ></textarea>
+
+                  <div style="margin-top: 5%"></div>
+
+                  <p style="margin-left: 8%">
+                    What improvements would you suggest for annotations to make
+                    them more effective in conveying data literacy learning?
+                  </p>
+
+                  <textarea
+                    class="form-control"
+                    style="width: 75%; margin-left: 8%"
+                    name="openTextbox2"
+                    id="openData2"
+                    rows="2"
+                    placeholder="Long answer text..."
+                  ></textarea>
+
+                  <div style="margin-top: 5%"></div>
+
+                  <p style="margin-left: 8%">
+                    What are your overall impressions in terms of the depth and
+                    comprehensiveness of the lessons?
+                  </p>
+
+                  <textarea
+                    class="form-control"
+                    style="width: 75%; margin-left: 8%"
+                    name="openTextbox3"
+                    id="openData3"
+                    rows="2"
+                    placeholder="Long answer text..."
+                  ></textarea>
+
+                  <p style="margin-left: 8%">
+                    What are your overall impressions of annotations?
+                  </p>
+
+                  <textarea
+                    class="form-control"
+                    style="width: 75%; margin-left: 8%"
+                    name="openTextbox4"
+                    id="openData4"
+                    rows="2"
+                    placeholder="Long answer text..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleDark"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <div class="filter-box">
+              <button
+                type="button"
+                onClick="sendAnswers()"
+                class="btn btn-primary btn-lg btn-block"
+                style="width: 100%"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+      var answerObject = {
+          readability1Answer:"",
+          readability2Answer:"",
+          correctness1Answer:"",
+          correctness2Answer:"",
+          relevance1Answer:"",
+          relevance2Answer:"",
+          engagement1Answer:"",
+          engagement2Answer:"",
+          depthAnswer:"",
+          redundancyAnswer:"",
+          openTextbox1Answer:"",
+          openTextbox2Answer:"",
+          openTextbox3Answer:"",
+          openTextbox4Answer:""
+        };
+
+        var textboxIdArray = [
+          "openData1",
+          "openData2",
+          "openData3",
+          "openData4",
+        ];
+
+        var textboxKeyArray = [
+          "openTextbox1Answer",
+          "openTextbox2Answer",
+          "openTextbox3Answer",
+          "openTextbox4Answer"
+        ];
+
+        var nameArray = [
+          "readability1RadioOptions",
+          "readability2RadioOptions",
+          "correctness1RadioOptions",
+          "correctness2RadioOptions",
+          "relevance1RadioOptions",
+          "relevance2RadioOptions",
+          "engagement1RadioOptions",
+          "engagement2RadioOptions",
+          "depthRadioOptions",
+          "redundancyRadioOptions",
+        ];
+
+        var keysArray = [
+          "readability1Answer",
+          "readability2Answer",
+          "correctness1Answer",
+          "correctness2Answer",
+          "relevance1Answer",
+          "relevance2Answer",
+          "engagement1Answer",
+          "engagement2Answer",
+          "depthAnswer",
+          "redundancyAnswer",
+        ];
+
+        var startTime = new Date()
+
+
+
+
+      //document.getElementById("qualityData").value = "Hello World"
+
+      var topic_list = {{ topics | tojson }}
+
+      var init_topic_explanation = {{ init_topic_explanation | tojson }}
+
+      var html_code = {{ html_code | tojson }}
+
+      var index = {{ topic_index | tojson}};
+
+      var survey_answer_record = {{ saved_answers | tojson }}
+
+      var topic_number = Object.keys(topic_list).length
+
+      var topic_name = topic_list[index.toString()]
+
+      var topic_list_item = document.getElementById("item"+index);
+      console.log(topic_list_item);
+      topic_list_item.classList.add("active");
+      //var topic_name = topic_list[index.toString()];
+        var topic_title_element = document.getElementById("topic-name-span");
+        topic_title_element.textContent = topic_name;
+
+      function sendAnswers() {
+
+        var newAnswerObject = {...answerObject}
+
+        assignTextboxAnswer(newAnswerObject, textboxKeyArray, textboxIdArray);
+
+        assignAnswer(newAnswerObject, keysArray, nameArray);
+
+        console.log(newAnswerObject);
+
+        var answerObjectKeys = Object.keys(newAnswerObject);
+
+        var flag = false;
+
+        for(i=0;i<answerObjectKeys.length;i++)
+        {
+          if(newAnswerObject[answerObjectKeys[i]] == "")
+          {
+            //console.log("Hwe")
+            console.log(newAnswerObject)
+            flag = true;
+          }
+        }
+
+        if(flag === false)
+        {
+          var jsonBody = { answers: newAnswerObject };
+
+          $.ajax({
+            url: "/send-survey2-answer",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(jsonBody),
+            success: function (serverResponseString) {
+              window.location.href = "/final";
+            },
+          });
+        }else{
+          alert("Please fill out the questions");
+        }
+
+
+
+
+        //window.location.href = "/description"
+      }
+
+      function assignAnswer(answerObject, keysArray, nameArray) {
+        for (i = 0; i < nameArray.length; i++) {
+          elements = document.getElementsByName(nameArray[i]);
+          for (j = 0; j < elements.length; j++) {
+            if (elements[j].checked) {
+              answerObject[keysArray[i]] = elements[j].value;
+              break;
+            }
+          }
+        }
+      }
+
+      function assignTextboxAnswer(answerObject, keyArray, idArray) {
+        for (i = 0; i < idArray.length; i++) {
+          answerObject[keyArray[i]] = document.getElementById(idArray[i]).value;
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+        /*
+       if(Object.keys(survey_answer_record).length!==0)
+      {
+        //filling up all of the textboxes
+        for(i=0;i<textboxKeyArray.length;i++)
+        {
+          var val = survey_answer_record[textboxKeyArray[i]];
+          document.getElementById(textboxIdArray[i]).value = val;
+        }
+
+        //now the radiobuttons
+        for(i=0;i<keysArray.length;i++)
+        {
+          var val = survey_answer_record[keysArray[i]]
+          var elements = document.getElementsByName(nameArray[i])
+
+          for(j=0;j<elements.length;j++)
+          {
+            if(elements[j].value == val)
+            {
+              elements[j].checked = true;
+              break;
+            }
+          }
+        }
+
+      }
+
+
+
+
+
+      console.log(survey_answer_record)
+
+      console.log(index)
+
+      console.log(topic_list);
+
+      var init_topic_id = "item" + index;
+      console.log(init_topic_id);
+      var topic_list_item = document.getElementById(init_topic_id);
+      console.log(topic_list_item);
+      topic_list_item.classList.add("active");
+
+      var topic_name = topic_list[index.toString()]
+      var topic_title_element = document.getElementById("topic-name-span")
+      topic_title_element.textContent = topic_name
+      */
+
+      var another_topic_list = {
+        1: "Understanding the Basics of Charts",
+        2: "Identifying Different Types of Charts",
+        3: "Reading the Chart Title and Subtitle",
+        4: "Interpreting the X and Y Axis",
+        5: "Understanding the Data Points and Bars",
+        6: "Reading the Legend",
+        7: "Analyzing the Data Trends",
+        8: "Drawing Conclusions from the Chart",
+        9: "Understanding the Color Coding in Charts",
+        10: "Learning about Data Sorting",
+        11: "Understanding the Scale and Range of Charts",
+        12: "Interpreting the Data Values",
+        13: "Understanding the Padding in Charts",
+        14: "Learning about Data Transformation",
+        15: "Understanding the Use of Scripts in Charts",
+      };
+
+      function topicNext() {
+
+        //if(index == topic_number)
+        //  return
+
+        var newAnswerObject = {...answerObject}
+
+        assignTextboxAnswer(newAnswerObject, textboxKeyArray, textboxIdArray);
+
+        assignAnswer(newAnswerObject, keysArray, nameArray);
+
+        var answerObjectKeys = Object.keys(newAnswerObject);
+
+        var flag = false;
+
+        for(i=0;i<answerObjectKeys.length;i++)
+        {
+          if(newAnswerObject[answerObjectKeys[i]] == "")
+          {
+            //console.log("Hwe")
+            console.log(newAnswerObject)
+            flag = true;
+          }
+        }
+
+        if(flag === false)
+        {
+
+          var endTime = new Date()
+          var timeTaken = endTime - startTime
+          var timeInSeconds = timeTaken/1000;
+          var new_index = index + 1;
+          var jsonBody = { answers: newAnswerObject, time: timeInSeconds, topicName: topic_name, topic_index: new_index};
+
+          console.log(jsonBody)
+
+          if(index == topic_number)
+          {
+            //var jsonBody = { answers: newAnswerObject };
+
+            $.ajax({
+              url: "/send-survey2-answer",
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify(jsonBody),
+              success: function (serverResponseString) {
+                window.location.href = "/final";
+              },
+            });
+          }else
+          {
+            $.ajax({
+            url: "/topic-change-click",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(jsonBody),
+            success: function (response) {
+
+              var new_url = "/description/"+response.serverResponseString
+              window.location.href = new_url
+
+              //window.location.href = "/final";
+            },
+          });
+          }
+
+        }else{
+          alert("Please fill out the questions");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        var prev_topic_id = "item" + index;
+        var new_topic_id = "item" + (index + 1);
+        var prev_topic_list_item = document.getElementById(prev_topic_id);
+        var new_topic_list_item = document.getElementById(new_topic_id);
+        //prev_topic_list_item.classList.remove("active");
+        //new_topic_list_item.classList.add("active");
+
+        var new_index = index + 1;
+
+        var jsonBody = {
+          topic_index: new_index,
+          survey_answers: newAnswerObject
+        }
+
+
+        $.ajax({
+          url: "/topic-change-click",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(jsonBody),
+          success: function (response) {
+            //window.location.href = "/description";
+            //console.log(response.serverResponseString)
+            var new_url = "/description/"+response.serverResponseString
+            window.location.href = new_url
+          },
+        });
+        */
+      }
+
+      function topicPrev() {
+
+        if(index == 1)
+          return
+
+        var newAnswerObject = {...answerObject}
+
+        assignTextboxAnswer(newAnswerObject, textboxKeyArray, textboxIdArray);
+
+        assignAnswer(newAnswerObject, keysArray, nameArray);
+
+        var prev_topic_id = "item" + index;
+        var new_topic_id = "item" + (index - 1);
+        var prev_topic_list_item = document.getElementById(prev_topic_id);
+        var new_topic_list_item = document.getElementById(new_topic_id);
+        //prev_topic_list_item.classList.remove("active");
+        //new_topic_list_item.classList.add("active");
+
+        var new_index = index - 1;
+
+        var jsonBody = {
+          topic_index: new_index,
+          survey_answers: newAnswerObject
+        }
+
+
+        $.ajax({
+          url: "/topic-change-click",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(jsonBody),
+          success: function (response) {
+            //window.location.href = "/description";
+            //console.log(response.serverResponseString)
+            var new_url = "/description/"+response.serverResponseString
+            window.location.href = new_url
+          },
+        });
+      }
+
+        //var topic_name = topic_list[index];
+        //console.log(topic_name);
+        //var res = await fetch("/get-topic-explanation", {
+        //  method: "POST",
+        //  headers: {
+        //   "Content-Type": "application/json",
+        //  },
+        //  body: JSON.stringify({ topic: topic_name }),
+        //});
+
+        //var body = await res.json();
+
+        // var result = await getModifiedChart(topic_name,body,index)
+
+        // if(result!=="No")
+        // {
+        //     var chartDiv = document.getElementById('chart-content');
+        //     chartDiv.innerHTML = result
+        //     eval(result)
+        // }
+
+        //var explanation_element = document.getElementById("explanation-span");
+
+        //explanation_element.textContent = body;
+
+        //var topic_name = topic_list[index.toString()];
+        //var topic_title_element = document.getElementById("topic-name-span");
+        //topic_title_element.textContent = topic_name;
+
+
+
+      async function getModifiedChart(topic_name, topic_explanation, idx_key) {
+        var res = await fetch("/get-modified-chart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            topic: topic_name,
+            explanation: topic_explanation,
+            index: idx_key,
+          }),
+        });
+
+        var body = await res.json();
+        return body;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+```<!doctype html>
+<html>
+  <head>
+    <!-- Load plotly.js into the DOM -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  </head>
+  <body>
+    <h1>
+      Introduction to Data Visualization: Seasonal Crop Moisture Comparison
+    </h1>
+    <div id="myDiv"></div>
+
+    <script>
+      var x = [
+        "day 1",
+        "day 1",
+        "day 1",
+        "day 1",
+        "day 1",
+        "day 1",
+        "day 2",
+        "day 2",
+        "day 2",
+        "day 2",
+        "day 2",
+        "day 2",
+      ];
+
+      var trace1 = {
+        y: [0.2, 0.2, 0.6, 1.0, 0.5, 0.4, 0.2, 0.7, 0.9, 0.1, 0.5, 0.3],
+        x: x,
+        name: "kale",
+        marker: { color: "#3D9970" },
+        type: "box",
+      };
+
+      var trace2 = {
+        y: [0.6, 0.7, 0.3, 0.6, 0.0, 0.5, 0.7, 0.9, 0.5, 0.8, 0.7, 0.2],
+        x: x,
+        name: "radishes",
+        marker: { color: "#FF4136" },
+        type: "box",
+      };
+
+      var trace3 = {
+        y: [0.1, 0.3, 0.1, 0.9, 0.6, 0.6, 0.9, 1.0, 0.3, 0.6, 0.8, 0.5],
+        x: x,
+        name: "carrots",
+        marker: { color: "#FF851B" },
+        type: "box",
+      };
+
+      var data = [trace1, trace2, trace3];
+
+      var layout = {
+        yaxis: {
+          title: "normalized moisture",
+          zeroline: false,
+        },
+        boxmode: "group",
+        annotations: [
+          {
+            x: "day 1",
+            y: 0.5,
+            xref: "x",
+            yref: "y",
+            text: "Median moisture level for kale on day 1",
+            showarrow: true,
+            font: {
+              family: "Courier New, monospace",
+              size: 16,
+              color: "#ffffff",
+            },
+            align: "center",
+            arrowhead: 2,
+            arrowsize: 1,
+            arrowwidth: 2,
+            arrowcolor: "#636363",
+            ax: 20,
+            ay: -30,
+            bordercolor: "#c7c7c7",
+            borderwidth: 2,
+            borderpad: 4,
+            bgcolor: "#ff0000",
+            opacity: 0.8,
+          },
+          {
+            x: "day 2",
+            y: 0.7,
+            xref: "x",
+            yref: "y",
+            text: "Median moisture level for radishes on day 2",
+            showarrow: true,
+            font: {
+              family: "Courier New, monospace",
+              size: 16,
+              color: "#ffffff",
+            },
+            align: "center",
+            arrowhead: 2,
+            arrowsize: 1,
+            arrowwidth: 2,
+            arrowcolor: "#636363",
+            ax: 20,
+            ay: -30,
+            bordercolor: "#c7c7c7",
+            borderwidth: 2,
+            borderpad: 4,
+            bgcolor: "#ff0000",
+            opacity: 0.8,
+          },
+          {
+            x: "day 2",
+            y: 0.8,
+            xref: "x",
+            yref: "y",
+            text: "Median moisture level for carrots on day 2",
+            showarrow: true,
+            font: {
+              family: "Courier New, monospace",
+              size: 16,
+              color: "#ffffff",
+            },
+            align: "center",
+            arrowhead: 2,
+            arrowsize: 1,
+            arrowwidth: 2,
+            arrowcolor: "#636363",
+            ax: 20,
+            ay: -30,
+            bordercolor: "#c7c7c7",
+            borderwidth: 2,
+            borderpad: 4,
+            bgcolor: "#ff0000",
+            opacity: 0.8,
+          },
+        ],
+      };
+
+      Plotly.newPlot("myDiv", data, layout);
+    </script>
+  </body>
+</html>
+```

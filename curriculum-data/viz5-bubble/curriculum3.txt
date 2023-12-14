@@ -1,0 +1,15 @@
+{
+  "1": "Introduction to Data Visualization",
+  "2": "Understanding Different Types of Charts",
+  "3": "Introduction to Bubble Charts",
+  "4": "Identifying Key Elements in a Bubble Chart",
+  "5": "Understanding the Role of X and Y Axes in a Bubble Chart",
+  "6": "Interpreting the Size of Bubbles in a Bubble Chart",
+  "7": "Interpreting the Color of Bubbles in a Bubble Chart",
+  "8": "Reading Data from a Bubble Chart",
+  "9": "Analyzing Trends in a Bubble Chart",
+  "10": "Comparing Data Points in a Bubble Chart",
+  "11": "Drawing Conclusions from a Bubble Chart",
+  "12": "Limitations and Misinterpretations of Bubble Charts",
+  "13": "Practical Exercises on Bubble Chart Data Interpretation"
+}

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Project Prototype</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Option 1: Include in HTML -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        color: white;
+        background: linear-gradient(45deg, #444, #666);
+        font-family: "Roboto", sans-serif;
+      }
+
+      .main-container {
+        height: 100vh;
+        padding: 50px;
+        box-sizing: border-box;
+        display: flex;
+      }
+
+      .consent-section {
+        border-radius: 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: auto;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+      }
+
+      .filter-section:hover,
+      .text-section:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); /* Reduced shadow opacity on hover */
+      }
+
+      .consent-section {
+        width: 100%;
+        height: 90%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 3%;
+        margin-left: 3%;
+      }
+
+      .button-section {
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 10%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 3%;
+        margin-left: 3%;
+        margin-bottom: 3%;
+        
+      }
+
+      .filter-box {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .section {
+        margin: 20px 0;
+      }
+
+      .custom-btn-group label {
+        margin-right: 10px; /* Adjust the value to control the margin */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <div class="consent-section" id="consentSection">
+          <div class="filter-box">
+            <h2>Consent Form</h2>
+
+            <div class="section">
+              <p><strong>What is our study about?</strong></p>
+              <p>
+                The purpose of our study is to gauge the efficacy of
+                automatically generated interfaces in helping Internet browsers
+                understand the content they come across. We will present you
+                with multiple types of graphs as well as at times ask you to use
+                a prototype of our program. The prototype will be hosted online
+                and will not require any installation.
+              </p>
+            </div>
+
+            <div class="section">
+              <p><strong>What will you do in this study?</strong></p>
+              <p>
+                If you agree to participate in our study, you will answer some
+                multiple-choice and short-answer questions about graphs that we
+                will provide you with. You will complete this task guided by a
+                web application. You will interact with and interpret a
+                visualization provided by the experimenters. We log your
+                interactions in your web browser, including clicks, scrolls, and
+                other actions. We are NOT able to view your browser history or
+                other websites you have opened during the study. The information
+                we collect will be used to judge the efficacy of and improve our
+                program.
+              </p>
+            </div>
+
+            <div class="section">
+              <p><strong>How long will this study take?</strong></p>
+              <p>We anticipate the study will take at most 25 minutes.</p>
+            </div>
+
+            <div class="section">
+              <p><strong>What risks are associated with this study?</strong></p>
+              <p>
+                <strong>Loss of Confidentiality:</strong> Data we collect,
+                including question responses and user actions in our web
+                application, will only be shared amongst members of our research
+                team. Data will be deleted after our study. Research records
+                will be kept confidential to the extent allowed by law. Research
+                records may also be reviewed by the Temple Institutional Review
+                Board.
+              </p>
+            </div>
+
+            <div class="section">
+              <p>
+                <strong
+                  >What are alternatives to participating in the study?</strong
+                >
+              </p>
+              <p>
+                You are not under any obligation to participate in the study. If
+                at any time you choose to end participation in the study, you
+                may notify a researcher, and we will delete your data.
+              </p>
+            </div>
+
+            <div class="section">
+              <p><strong>What benefits/compensation can you expect?</strong></p>
+              <p>
+                You will be compensated with $10 for participating in our study.
+              </p>
+            </div>
+
+            <div class="section">
+              <p><strong>Ending participation in our study</strong></p>
+              <p>
+                Participation is entirely voluntary. You may end participation
+                early at any time without penalty or loss of the
+                benefits/compensation to which you are entitled. If you decide
+                to end participation early, you may notify a researcher, and we
+                will delete your data.
+              </p>
+            </div>
+
+            <div class="section">
+              <p><strong>Other conditions of withdrawal</strong></p>
+              <p>
+                The PI may remove you from the study without your consent if the
+                PI feels it is in your best interest or the best interest of the
+                study. If you end your session and cannot reconnect, we will
+                remove you from the study.
+              </p>
+            </div>
+
+            <div class="section">
+              <p><strong>Are there any associated costs?</strong></p>
+              <p>There will be no costs that you will be responsible for.</p>
+            </div>
+
+            <div class="section">
+              <p>
+                <strong
+                  >Who can you contact if there are additional
+                  questions?</strong
+                >
+              </p>
+              <p>
+                If you have any additional questions or run into issues, you may
+                also contact Stephen MacNeil, the PI, at
+                stephen.macneil@temple.edu
+              </p>
+            </div>
+            <div class="section">
+              <p>
+                <strong
+                  >Who can you contact if there are additional
+                  questions?</strong
+                >
+              </p>
+              <p>
+                If you have any additional questions or run into issues, you may
+                also contact Stephen MacNeil, the PI, at
+                stephen.macneil@temple.edu
+              </p>
+            </div>
+            <div class="section">
+              <p>
+                <strong
+                  >Who can you contact if there are additional
+                  questions?</strong
+                >
+              </p>
+              <p>
+                If you have any additional questions or run into issues, you may
+                also contact Stephen MacNeil, the PI, at
+                stephen.macneil@temple.edu
+              </p>
+            </div>
+            <div class="section">
+              <p>
+                Participants may contact Temple's Human Research Protection
+                Program through the IRB at irb@temple.edu or (215) 707-3390
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="button-section" id="buttonSection">
+          <div style="display:flex;flex-direction: row; justify-content: center; align-items: center;">
+            <button type="button" id="yesBtn" class="btn btn-primary" style="margin-right:2%;margin-left: 2%;">
+              Yes <i class="bi bi-check-circle-fill"></i>
+            </button>
+            <button type="button" id="noBtn" class="btn btn-primary" style="margin-right:2%;margin-left: 2%;">
+              No <i class="bi bi-x-circle-fill"></i>
+            </button>
+          
+          
+        
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      
+      var consentBody = document.getElementById('consentSection');
+
+      var yesBtn = document.getElementById('yesBtn');
+
+      // consentBody.addEventListener('scroll',function(){
+      //   var consentHeight = consentBody.offsetHeight
+      //   consentBody.s
+      //   console.log("Scroll H:",consentBody.scrollTop);
+      //   console.log("Client H:",consentBody.clientHeight)
+      //   if(consentHeight === (consentBody.scrollTop + consentBody.clientHeight))
+      //   {
+      //     console.log("Hello world");
+      //   }
+      // })
+        
+      var flag=false;
+      
+    //   $('.consent-section').scroll(function() {
+    //     if($(this).scrollTop() + $(this).innerHeight()  >= $(this)[0].scrollHeight+) {
+    //       console.log("erer")  
+    //       if(flag === false)
+    //         {
+    //           flag = true;
+    //           $("#yesBtn").removeAttr("disabled");
+    //           $("#noBtn").removeAttr("disabled");
+    //         }
+    //     }
+    // });
+
+
+      document.getElementById("yesBtn").addEventListener("click", function() {
+            // Redirect the user to a specific URL when the button is clicked
+            window.location.href = "/curriculum/1";  // Replace "/new-page" with your desired URL
+      });
+
+
+
+      
+
+      // function checkScroll() {
+      //   const consentSection = document.querySelector('#consentSection');
+      //   const buttonSection = document.querySelector('#buttonSection');
+
+      //   console.log(consentSection.offsetTop + consentSection.offsetHeight);
+      //   console.log(window.scrollY + window.innerHeight) 
+
+      //   if (
+      //     window.scrollY + window.innerHeight >=
+      //     consentSection.offsetTop + consentSection.offsetHeight
+      //   ) {
+      //     // User has scrolled to the end of the consent form, enable the buttons
+      //     buttonSection.classList.add('active');
+      //   }
+      // }
+
+      // // Add a scroll event listener to check for scrolling
+      // window.addEventListener('scroll', checkScroll);
+
+      // // Initially, disable the buttons
+      // const buttonSection = document.querySelector('#buttonSection');
+      // buttonSection.classList.remove('active');
+    </script>
+  </body>
+</html>

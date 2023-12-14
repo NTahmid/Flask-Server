@@ -1,0 +1,15 @@
+{
+  "1": "Introduction to Data Visualization",
+  "2": "Understanding the Basics of a Scatter Plot",
+  "3": "Identifying Key Components of a Scatter Plot",
+  "4": "Interpreting Data Points in a Scatter Plot",
+  "5": "Understanding the Relationship between Variables in a Scatter Plot",
+  "6": "Analyzing Patterns and Trends in a Scatter Plot",
+  "7": "Identifying Outliers in a Scatter Plot",
+  "8": "Understanding the Correlation in a Scatter Plot",
+  "9": "Interpreting the Scatter Plot with a Trend Line",
+  "10": "Analyzing Multivariate Scatter Plots",
+  "11": "Applying Scatter Plots in Real-world Scenarios",
+  "12": "Critiquing and Improving Scatter Plot Visualizations",
+  "13": "Exploring Advanced Scatter Plot Concepts: Density, Jittering, and Marginal Histograms"
+}

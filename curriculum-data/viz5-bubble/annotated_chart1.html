@@ -1,0 +1,68 @@
+To annotate and highlight the data points that are talked about in the explanation, we can modify the D3.js code to add a red stroke to the circles representing the data points. We will also increase the radius of these circles to make them stand out more. Here's how you can modify the code:
+
+1. Add a new color for the annotation in the `colors` array.
+2. Modify the `.attr("r", 5)` line to increase the radius of the circles conditionally based on whether the data point is being talked about.
+3. Add a `.attr("stroke", ...)` line to add a red stroke conditionally to the same data points.
+
+Here's the modified section of the code:
+
+```javascript
+// Colors to differentiate riders with and without doping allegations
+var colors = ["#27ae60", "#8e44ad", "#e74c3c"]; // Added red color for annotation
+
+// The attributes of the riders corresponding to the above colors
+var legendKeys = ["No Doping Allegations", "Doping Allegations", "Highlighted Data Points"]; // Added legend key for annotation
+
+// ...
+
+// 5. Draw individual scatter points and define mouse events for the tooltip
+svg
+  .selectAll("scatterPoints")
+  .data(data)
+  .enter()
+  .append("circle")
+  .attr("cx", (d) => xScale(d["Year"]))
+  .attr("cy", (d) => yScale(parseTime(d["Time"])))
+  .attr("r", (d) => {
+    // Increase the radius for highlighted data points
+    if (d["Name"] === "Marco Pantani" || d["Name"] === "Lance Armstrong") {
+      return 8;
+    }
+    return 5;
+  })
+  .attr("fill", (d) => (d["Doping"] == "" ? colors[0] : colors[1]))
+  .attr("stroke", (d) => {
+    // Add red stroke for highlighted data points
+    if (d["Name"] === "Marco Pantani" || d["Name"] === "Lance Armstrong") {
+      return colors[2];
+    }
+    return "none";
+  })
+  .attr("stroke-width", 2) // Set the stroke width for highlighted data points
+  .attr("class", "dot")
+  .attr("data-xvalue", (d) => d["Year"])
+  .attr("data-yvalue", (d) => parseTime(d["Time"]))
+  // ... (rest of the event handlers)
+```
+
+Additionally, you can add a new entry to the legend to represent the highlighted data points:
+
+```javascript
+// ...
+
+svg
+  .selectAll("legendSymbols")
+  .data(legendKeys)
+  .enter()
+  .append("circle")
+  .attr("cx", width - margin.right - 200)
+  .attr("cy", (d, i) => 150 + i * 25)
+  .attr("r", (d, i) => (i === 2 ? 8 : 5)) // Increase radius for the annotation legend symbol
+  .attr("fill", (d, i) => colors[i])
+  .attr("stroke", (d, i) => (i === 2 ? colors[2] : "none")) // Add red stroke for the annotation legend symbol
+  .attr("stroke-width", (d, i) => (i === 2 ? 2 : 0)); // Set the stroke width for the annotation legend symbol
+
+// ...
+```
+
+These modifications will highlight the data points for Marco Pantani and Lance Armstrong with a red stroke and a larger radius, making them stand out as annotated points in the visualization.

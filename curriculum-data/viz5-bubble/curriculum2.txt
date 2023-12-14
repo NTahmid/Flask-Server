@@ -1,0 +1,13 @@
+{
+  "1": "Introduction to Charts and Graphs",
+  "2": "Understanding Different Types of Charts",
+  "3": "Introduction to Bubble Charts",
+  "4": "Understanding the Components of a Bubble Chart",
+  "5": "Interpreting Data from a Bubble Chart",
+  "6": "Understanding the Relationship between Variables in a Bubble Chart",
+  "7": "Analyzing Trends in a Bubble Chart",
+  "8": "Comparing Data Points in a Bubble Chart",
+  "9": "Understanding the Impact of Bubble Size and Color in a Bubble Chart",
+  "10": "Drawing Conclusions from a Bubble Chart",
+  "11": "Applying Bubble Chart Data Interpretation in Real-World Scenarios"
+}

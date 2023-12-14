@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Project Prototype</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Option 1: Include in HTML -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        color: white;
+        background: linear-gradient(45deg, #444, #666);
+        font-family: "Roboto", sans-serif;
+      }
+
+      .main-container {
+        height: 100vh;
+        padding: 50px;
+        box-sizing: border-box;
+        display: flex;
+      }
+
+      .filter-section,
+      .text-section {
+        border-radius: 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%;
+        overflow: auto;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+      }
+
+      .filter-section:hover,
+      .text-section:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); /* Reduced shadow opacity on hover */
+      }
+
+      .filter-section {
+        width: 50%;
+        background-color: #555; /* Lighter background color */
+        margin-right: 20px;
+      }
+
+      .text-section {
+        width: 70%;
+        background-color: #555; /* Lighter background color */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-control,
+      .dropdown-menu {
+        background-color: #666; /* Lighter input background color */
+        color: white;
+        border: 1px solid #777; /* Lighter border color */
+      }
+
+      .dropdown-item {
+        color: white;
+      }
+
+      .dropdown-item:hover {
+        background-color: #888; /* Lighter hover color for dropdown items */
+      }
+
+      .form-check-label {
+        font-weight: 300;
+      }
+
+      .form-check-input:checked + .form-check-label {
+        font-weight: 400;
+      }
+
+      .filter-box {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #777; /* Lighter border color */
+        border-radius: 5px;
+      }
+
+      .form-check-label:before {
+        background: #c1c0c0; /* Lighter color for unchecked state */
+        border: 1px solid #888; /* Lighter border color */
+      }
+
+      .form-check-label:after {
+        background: #999; /* Lighter color for checked state */
+        transform: scale(0.6);
+        opacity: 0;
+      }
+
+      .text-content {
+        flex: 1;
+        overflow: auto;
+        padding-bottom: 20px;
+      }
+
+      .text-section p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        padding-left: 15px;
+        border-left: 3px solid #999; /* Lighter border color */
+      }
+
+      .text-section p strong {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #eee;
+      }
+
+      .text-section p:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .explanation-box {
+        flex: 1;
+        margin-top: 20px;
+        background-color: #555; /* Lighter background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow opacity */
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .explanation-text {
+        flex: 1;
+        overflow: auto;
+      }
+
+      .card-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+      }
+
+      .btn-icon {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+      }
+
+      /* Darker background on mouse-over */
+      .btn-icon:hover {
+        background-color: RoyalBlue;
+      }
+
+      .btn-light {
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .btn-light:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-light:active {
+        transform: scale(0.95);
+      }
+
+      .custom-btn-group label {
+        margin-right: 10px; /* Adjust the value to control the margin */
+      }
+    </style>
+    <div class="main-container">
+      <form
+        action="/chart"
+        method="post"
+        style="display: flex; flex-direction: column; height: 100%; width: 100%"
+      >
+        <div
+          style="display: flex; flex-direction: row; height: 100%; width: 100%"
+        >
+          <div class="filter-section">
+            <div class="filter-box">
+              <span
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                "
+                ><p><strong>Consent Form</strong></p></span
+              >
+              <p>Hello World</p>
+              <div
+                class="btn-group btn-group-toggle custom-btn-group"
+                data-toggle="buttons"
+                style="display: flex; flex-direction: row; align-items: center"
+              >
+                <label class="btn btn-secondary">
+                  <input
+                    type="radio"
+                    name="options"
+                    id="option1"
+                    autocomplete="off"
+                  />
+                  Yes
+                  <i class="bi bi-hand-thumbs-up"></i>
+                </label>
+                <label class="btn btn-secondary">
+                  <input
+                    type="radio"
+                    name="options"
+                    id="option2"
+                    autocomplete="off"
+                  />
+                  No
+                  <i class="bi bi-hand-thumbs-down"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-box">
+              <p>What is your current education level?</p>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="option1"
+                />
+                <label class="form-check-label" for="inlineRadio1"
+                  >Elementary School</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="option2"
+                />
+                <label class="form-check-label" for="inlineRadio2"
+                  >Middle School</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio3"
+                  value="option3"
+                />
+                <label class="form-check-label" for="inlineRadio3"
+                  >High School</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio4"
+                  value="option3"
+                />
+                <label class="form-check-label" for="inlineRadio4"
+                  >Undergraduate</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio5"
+                  value="option3"
+                />
+                <label class="form-check-label" for="inlineRadio5"
+                  >Graduate</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio6"
+                  value="option3"
+                />
+                <label class="form-check-label" for="inlineRadio6"
+                  >Professional</label
+                >
+              </div>
+            </div>
+            <div class="filter-box">
+              <p>What is your expertise in interpreting data visualizations?</p>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="vizRadio1"
+                  value="option1"
+                />
+                <label class="form-check-label" for="vizRadio1"
+                  >Minimally Skilled</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="vizRadio2"
+                  value="option2"
+                />
+                <label class="form-check-label" for="vizRadio2"
+                  >Moderately Skilled</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="vizRadio3"
+                  value="option3"
+                />
+                <label class="form-check-label" for="vizRadio3"
+                  >Highly Skilled</label
+                >
+              </div>
+            </div>
+            <div class="filter-box">
+              <p>
+                Do you ever work with data or use data for your work or job?
+              </p>
+              <div class="text-center mb-3">
+                <div class="d-inline mx-3">Bad</div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadioa"
+                    value="option1"
+                  />
+                  <label class="form-check-label" for="inlineRadio1">1</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadiob"
+                    value="option2"
+                  />
+                  <label class="form-check-label" for="inlineRadio2">2</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadioc"
+                    value="option3"
+                  />
+                  <label class="form-check-label" for="inlineRadio3">3</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadiod"
+                    value="option4"
+                  />
+                  <label class="form-check-label" for="inlineRadio4">4</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadioe"
+                    value="option5"
+                  />
+                  <label class="form-check-label" for="inlineRadio5">5</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadiof"
+                    value="option6"
+                  />
+                  <label class="form-check-label" for="inlineRadio6">6</label>
+                </div>
+                <div class="d-inline me-4">Excellent</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="filter-box" style="border: none">
+          <button type="button" class="btn btn-primary btn-lg btn-block">
+            Block level button
+          </button>
+        </div>
+      </form>
+    </div>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      <!--        $().button('toggle')-->
+      // Get all radio buttons in the group
+      const radioButtons = document.querySelectorAll(
+        '.custom-btn-group input[type="radio"]'
+      );
+
+      // Add event listeners to handle button behavior
+      radioButtons.forEach((radioButton) => {
+        radioButton.addEventListener("change", (event) => {
+          // Deselect all radio buttons in the group
+          radioButtons.forEach((rb) => {
+            if (rb !== event.target) {
+              rb.checked = false;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

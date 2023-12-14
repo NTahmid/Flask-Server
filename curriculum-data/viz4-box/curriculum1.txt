@@ -1,0 +1,12 @@
+{
+  "1": "Introduction to Charts and Graphs",
+  "2": "Understanding the Basics of a Box Plot",
+  "3": "Identifying Key Components of a Box Plot: Median, Quartiles, Outliers",
+  "4": "Interpreting a Single Box Plot: Distribution and Variability",
+  "5": "Understanding Grouped Box Plots",
+  "6": "Comparing Distributions Across Groups in a Box Plot",
+  "7": "Analyzing Variability Within and Between Groups in a Box Plot",
+  "8": "Applying Real-World Context to Box Plot Interpretation",
+  "9": "Critical Thinking: What Can and Can’t Be Interpreted from a Box Plot",
+  "10": "Advanced Box Plot Interpretation: Skewness, Kurtosis, and Other Concepts"
+}

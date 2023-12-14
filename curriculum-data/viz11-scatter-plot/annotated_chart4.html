@@ -1,0 +1,130 @@
+Here's the modified HTML code with annotations in red for the data points mentioned in the explanation:
+
+```html
+<!doctype html>
+<meta charset="utf-8" />
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v6.min.js" charset="utf-8"></script>
+  </head>
+
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+
+    #tooltip {
+      visibility: hidden;
+      position: absolute;
+      opacity: 0.8;
+      padding: 10px;
+      vertical-align: middle;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+      font-size: 14px;
+    }
+
+    .textbox {
+      font-size: 14px;
+    }
+
+    #legend {
+      opacity: 0.2;
+      fill: #2c3e50;
+    }
+
+    #title {
+      text-anchor: middle;
+      font-size: 22px;
+    }
+
+    .label {
+      text-anchor: middle;
+    }
+
+    #svg {
+      background-color: white;
+    }
+
+    .annotation {
+      fill: red;
+    }
+  </style>
+
+  <body>
+    <div id="container" align="center"></div>
+
+    <script type="text/javascript">
+      // Data provided in the explanation
+      var data = [
+        // ... (Insert the provided data array here)
+      ];
+
+      // Colors to differentiate riders with and without doping allegations
+      var colors = ["#27ae60", "#8e44ad", "#e74c3c"]; // Added red color for annotation
+
+      // The attributes of the riders corresponding to the above colors
+      var legendKeys = ["No Doping Allegations", "Doping Allegations", "Highlighted Riders"];
+
+      // Create an invisible div for the tooltip
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("visibility", "hidden");
+
+      // Set up the SVG and scales as before...
+
+      // Draw individual scatter points and define mouse events for the tooltip
+      svg
+        .selectAll("scatterPoints")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", (d) => xScale(d["Year"]))
+        .attr("cy", (d) => yScale(parseTime(d["Time"])))
+        .attr("r", 5)
+        .attr("fill", (d) => {
+          // Check if the rider is Marco Pantani in 1995 for annotation
+          if (d["Name"] === "Marco Pantani" && d["Year"] === 1995) {
+            return "#e74c3c"; // Red color for annotation
+          }
+          return d["Doping"] === "" ? colors[0] : colors[1];
+        })
+        .attr("class", "dot")
+        .attr("data-xvalue", (d) => d["Year"])
+        .attr("data-yvalue", (d) => parseTime(d["Time"]))
+        // ... (Keep the rest of the event handlers for tooltip)
+
+      // Add the rest of the chart elements (axes, labels, legend, etc.) as before...
+
+      // Add the new legend entry for the annotated riders
+      svg
+        .selectAll("legendSymbols")
+        .data(legendKeys)
+        .enter()
+        .append("circle")
+        .attr("cx", width - margin.right - 200)
+        .attr("cy", (d, i) => 150 + i * 25)
+        .attr("r", 5)
+        .attr("fill", (d, i) => colors[i]);
+
+      svg
+        .selectAll("legendTexts")
+        .data(legendKeys)
+        .enter()
+        .append("text")
+        .text((d) => d)
+        .attr("x", width - margin.right - 200 + 15)
+        .attr("y", (d, i) => 150 + i * 25 + 5)
+        .attr("class", "textbox");
+
+      // ... (Keep the rest of the code as is)
+    </script>
+  </body>
+</html>
+```
+
+Please note that I've added a new color (`#e74c3c`, which is red) to the `colors` array and a new legend key (`"Highlighted Riders"`) to the `legendKeys` array. In the section where the scatter points are drawn, I've added a condition to check if the rider is Marco Pantani in the year 1995 and set the fill color to red for annotation. You can add similar conditions for other riders and years as needed.
+
+Remember to insert the provided data array in place of the comment `// ... (Insert the provided data array here)` to complete the data input for the chart.

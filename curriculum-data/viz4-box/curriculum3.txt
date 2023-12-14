@@ -1,0 +1,12 @@
+{
+  "1": "Introduction to Data Visualization",
+  "2": "Understanding the Basics of a Box Plot",
+  "3": "Identifying Key Components of a Box Plot: Median, Quartiles, Whiskers, and Outliers",
+  "4": "Interpreting the Central Tendency and Dispersion from a Box Plot",
+  "5": "Comparing Distributions using Box Plots",
+  "6": "Understanding the Significance of Skewness in a Box Plot",
+  "7": "Analyzing Multivariate Data using Grouped Box Plots",
+  "8": "Interpreting Normalized Data in a Box Plot",
+  "9": "Applying Box Plots for Outlier Detection",
+  "10": "Real-world Applications and Limitations of Box Plots"
+}

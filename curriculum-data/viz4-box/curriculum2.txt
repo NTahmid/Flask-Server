@@ -1,0 +1,12 @@
+{
+  "1": "Introduction to Charts and Graphs",
+  "2": "Understanding the Basics of a Box Plot",
+  "3": "Identifying Key Components of a Box Plot: Median, Quartiles, Outliers",
+  "4": "Understanding Grouped Box Plots",
+  "5": "Interpreting Data from a Single Box Plot",
+  "6": "Comparing Data Across Multiple Box Plots",
+  "7": "Understanding the Role of Colors in Grouped Box Plots",
+  "8": "Analyzing Trends and Patterns in Grouped Box Plots",
+  "9": "Applying Real-World Context to Data Interpretation",
+  "10": "Practicing Data Interpretation with Various Box Plot Examples"
+}
